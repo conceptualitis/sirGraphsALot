@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Example of sirGraphsALot</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div id="wrapper">
+		<h1>Welcome to SirGraphsALot</h1>
+		<ul id="graph-me">
+			<li>Fact 1: 89</li>
+			<li>Fact 2: 19</li>
+			<li>Fact 3: 54</li>
+		</ul>
+	</div>
+	
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="sirgraphsalot.jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#graph-me').graph();
+	});
+</script>
+</body>
+</html>
