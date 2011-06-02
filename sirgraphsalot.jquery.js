@@ -24,12 +24,12 @@
             	var o = options;
                 var list = $(this);
                 var lis = $('li',list);
-                var listWidth = lis.length * o.liWidth + lis.length * o.spacing;
+                var listWidth = lis.length * o.liWidth + lis.length * o.spacing + o.spacing;
                 var biggest = 0;
                 
                 lis.each(function(index){
                 	var guts = $(this).text().split(": ");
-                	var leftPos = index * o.liWidth + index * o.spacing;
+                	var leftPos = index * o.liWidth + index * o.spacing + o.spacing;
                 	if ( biggest < guts[1] ){
                 		biggest = guts[1] - 0;
                 	}
@@ -51,6 +51,7 @@
                 		borderBottomWidth: 0,
                 		borderBottomStyle: 'solid',
                 		position: 'absolute',
+                		zIndex: '100',
                 		bottom: '0',
                 		left: leftPos + 'px', 
                 		width: o.liWidth + 'px', 
@@ -59,7 +60,24 @@
                 	}).animate({ borderBottomWidth: guts[1]+'px' }, o.speed );
                 });
                 
-                list.css({ width: listWidth + 'px', height:(biggest+20)+'px', position: 'relative', padding: '0'});
+                if ( undefined !== o.scale && undefined !== o.interval ) {
+                	var lines = '';
+                	for(var i = 0; i <= o.scale; i+=o.interval){
+                		lines += '<span style="background:#ccc;position:absolute;z-index:10;display:block;width:100%;height:1px;top:'+ i +'px;"></span>';
+                		lines += '<span style="display:block;width:50px;padding-right:5px;position:absolute;z-index:10;bottom:'+ (i - 7) +'px;right:100%;font-size:10px;text-align:right;color:#ccc;">'+ i +'</span>';
+                	}
+                	list.append(lines);
+                	list.css({
+                		width: listWidth + 'px',
+                		height:o.scale+'px', 
+                		position: 'relative', 
+                		padding: '0', 
+                		borderLeft: '1px solid #ccc',
+                	});
+                }
+                else {
+	                list.css({ width: listWidth + 'px', height:(biggest+20)+'px', position: 'relative', padding: '0'});
+	            }
                                
             });
         }
