@@ -19,7 +19,18 @@
 <script type="text/javascript" src="sirgraphsalot.jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#graph-me').graph();
+		$('#graph-me').graph({
+			color: '#00B3FF',
+		});
+		/*
+		Ways to set color
+		$('#graph-me').graph({
+			color:'red',
+		});
+		$('#graph-me').graph({
+			color:new Array('red','blue','green'),
+		});
+		*/
 	});
 </script>
 </body>

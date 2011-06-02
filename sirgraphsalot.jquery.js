@@ -1,13 +1,21 @@
 (function($){
-    $.fn.extend({ 
+    $.fn.extend({
          
         graph: function(options) {
         
+	        function hexColor(){
+	    		var hex = '';
+	 			var possibles = '0123456789ABCDEF';
+	 			for( var i=0; i < 6; i++ ) {
+			        hex += possibles.charAt(Math.floor(Math.random() * possibles.length));
+			    }
+			    return '#' + hex;
+	    	}
+            
             var defaults = {
                 speed: 500,
                 liWidth:100,
                 spacing:10,
-                color:'#1b6de0',
             }
                  
             var options =  $.extend(defaults, options);
@@ -26,13 +34,32 @@
                 		biggest = guts[1] - 0;
                 	}
                 	
-	                $('<div>').text(guts[0]).css({ position: 'absolute', top: '100%', left: leftPos + 'px', width: o.liWidth + 'px', textAlign: 'center' }).appendTo(list);
+	                $('<div>').text(guts[0]).css({
+	                	position: 'absolute',
+	                	top: '100%',
+	                	left: leftPos + 'px',
+	                	width: o.liWidth + 'px',
+	                	textAlign: 'center'
+	                }).appendTo(list);
                 	
-                	$(this).attr('label',guts[0]).attr('total',guts[1]).text(guts[1]).css(
-                		{ borderColor: o.color, borderBottomWidth: 0, borderBottomStyle: 'solid', position: 'absolute', bottom: '0', left: leftPos + 'px', width: o.liWidth + 'px', listStyle: 'none', textAlign: 'center' }
-                	).animate({ borderBottomWidth: $(this).attr('total')+'px' }, o.speed );
+                	$(this).data('label',guts[0]).data('total',guts[1]).text(guts[1]).css({
+                		borderColor: function(){
+                				if (undefined === o.color) return hexColor();
+                				else if ( Array === o.color.constructor ) return o.color[index];
+                				else return o.color;
+                			},
+                		borderBottomWidth: 0,
+                		borderBottomStyle: 'solid',
+                		position: 'absolute',
+                		bottom: '0',
+                		left: leftPos + 'px', 
+                		width: o.liWidth + 'px', 
+                		listStyle: 'none',
+                		textAlign: 'center'
+                	}).animate({ borderBottomWidth: guts[1]+'px' }, o.speed );
                 });
-                list.css({ width: listWidth + 'px', height:(biggest+20)+'px', position: 'relative', padding: '0', margin: '0'});
+                
+                list.css({ width: listWidth + 'px', height:(biggest+20)+'px', position: 'relative', padding: '0'});
                                
             });
         }
