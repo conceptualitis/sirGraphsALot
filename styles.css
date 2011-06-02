@@ -11,10 +11,21 @@ html {
 #wrapper {
 	background-color:#f2f2f2;
 	height:300px;
-	width:920px;
+	width:500px;
 	padding:20px;
 	border-radius:10px;
 	box-shadow:0 5px 5px rgba(0,0,0,.2);
 	-webkit-box-shadow:0 2px 5px rgba(0,0,0,.2);
 	margin:10px auto 0;
+}
+
+h1 {
+	margin:0 auto;
+	text-align: center;
+	width:400px;
+	padding-bottom:20px;
+}
+
+ul#graph-me {
+	margin:0 auto;
 }
