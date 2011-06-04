@@ -12,6 +12,12 @@
 			<li>Fact 1: 89</li>
 			<li>Fact 2: 19</li>
 			<li>Fact 3: 54</li>
+			<li>Fact 4: 37</li>
+		</ul>
+		<ul id="little-graph">
+			<li>Fact 1: 8</li>
+			<li>Fact 2: 5</li>
+			<li>Fact 3: 1</li>
 		</ul>
 	</div>
 	
@@ -23,6 +29,13 @@
 			color: '#00B3FF',
 			scale: 100,
 			interval: 25,
+		});
+		$('#little-graph').graph({
+			color: '#005EFF',
+			scale: 10,
+			interval: 5,
+			intervalColor: '#808080',
+			multiply: 10,
 		});
 		/*
 		Ways to set color

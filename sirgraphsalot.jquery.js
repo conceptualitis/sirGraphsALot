@@ -16,6 +16,8 @@
                 speed: 500,
                 liWidth:100,
                 spacing:10,
+                multiply:1,
+                intervalColor: '#ccc',
             }
                  
             var options =  $.extend(defaults, options);
@@ -57,22 +59,22 @@
                 		width: o.liWidth + 'px', 
                 		listStyle: 'none',
                 		textAlign: 'center'
-                	}).animate({ borderBottomWidth: guts[1]+'px' }, o.speed );
+                	}).animate({ borderBottomWidth: (guts[1] * o.multiply )+'px' }, o.speed );
                 });
                 
                 if ( undefined !== o.scale && undefined !== o.interval ) {
                 	var lines = '';
                 	for(var i = 0; i <= o.scale; i+=o.interval){
-                		lines += '<span style="background:#ccc;position:absolute;z-index:10;display:block;width:100%;height:1px;top:'+ i +'px;"></span>';
-                		lines += '<span style="display:block;width:50px;padding-right:5px;position:absolute;z-index:10;bottom:'+ (i - 7) +'px;right:100%;font-size:10px;text-align:right;color:#ccc;">'+ i +'</span>';
+                		lines += '<span style="background:'+ o.intervalColor +';position:absolute;z-index:10;display:block;width:100%;height:1px;top:'+ (i * o.multiply) +'px;"></span>';
+                		lines += '<span style="display:block;width:50px;padding-right:5px;position:absolute;z-index:10;bottom:'+ (i * o.multiply - 7) +'px;right:100%;font-size:10px;text-align:right;color:'+ o.intervalColor +'">'+ i +'</span>';
                 	}
                 	list.append(lines);
                 	list.css({
                 		width: listWidth + 'px',
-                		height:o.scale+'px', 
+                		height: (o.scale * o.multiply) + 'px', 
                 		position: 'relative', 
-                		padding: '0', 
-                		borderLeft: '1px solid #ccc',
+                		padding: '0',
+                		borderLeft: '1px solid '+ o.intervalColor,
                 	});
                 }
                 else {
